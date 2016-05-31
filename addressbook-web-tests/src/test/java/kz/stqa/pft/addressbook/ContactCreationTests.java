@@ -34,10 +34,10 @@ public class ContactCreationTests {
     public void testContactCreation() {
         initContactCreation();
         fillContactForm(new ContactData("Петр", "Петрович", "Кузьмин", "ложки.ком", "+89654123654"));
-        returnMainPage();
+        buttonOkClick();
     }
 
-    private void returnMainPage() {
+    private void buttonOkClick() {
         wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
     }
 
