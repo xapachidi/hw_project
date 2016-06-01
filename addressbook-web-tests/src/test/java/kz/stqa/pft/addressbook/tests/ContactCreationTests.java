@@ -1,5 +1,6 @@
-package kz.stqa.pft.addressbook;
+package kz.stqa.pft.addressbook.tests;
 
+import kz.stqa.pft.addressbook.model.ContactData;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
