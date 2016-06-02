@@ -1,6 +1,8 @@
 package kz.stqa.pft.addressbook.tests;
 
 import kz.stqa.pft.addressbook.appmanager.ApplicationManager;
+import kz.stqa.pft.addressbook.model.ContactData;
+import org.openqa.selenium.By;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
@@ -22,5 +24,7 @@ public class TestBase {
 
         app.stop();
     }
+
+
 
 }

@@ -8,6 +8,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
  * Created by xeniya on 6/1/16.
  */
 public class HelperBase {
+
     protected FirefoxDriver wd;
 
     public HelperBase(FirefoxDriver wd) {
