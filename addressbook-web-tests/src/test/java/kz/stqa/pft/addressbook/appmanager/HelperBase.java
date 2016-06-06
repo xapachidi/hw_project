@@ -5,6 +5,8 @@ import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import java.util.NoSuchElementException;
+
 /**
  * Created by xeniya on 6/1/16.
  */
@@ -41,4 +43,5 @@ public class HelperBase {
             return false;
         }
     }
+
 }

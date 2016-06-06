@@ -4,6 +4,10 @@ import kz.stqa.pft.addressbook.model.ContactData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
+
+import java.util.NoSuchElementException;
 
 /**
  * Created by xeniya on 6/2/16.
@@ -14,12 +18,27 @@ public class ContactHelper extends HelperBase {
         super(wd);
     }
 
-    public void fillContactForm(ContactData contactData) {
+    public void fillContactForm(ContactData contactData, boolean creation) {
         type(By.name("firstname"), contactData.getFirst_name());
         type(By.name("middlename"), contactData.getSecond_name());
         type(By.name("lastname"), contactData.getLast_name());
         type(By.name("company"), contactData.getCompany());
         type(By.name("home"), contactData.getPhone());
+
+        if (creation){
+            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+        } else {
+            Assert.assertFalse(isElementPresent(By.name("new_group")));
+        }
+    }
+
+    protected boolean isElementPresent(By locator) {
+        try{
+            wd.findElement(locator);
+            return true;
+        } catch (NoSuchElementException ex){
+            return false;
+        }
     }
 
     public void selectContact() {
