@@ -7,7 +7,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
-import java.util.NoSuchElementException;
+import org.openqa.selenium.NoSuchElementException;
 
 /**
  * Created by xeniya on 6/2/16.
@@ -32,14 +32,6 @@ public class ContactHelper extends HelperBase {
         }
     }
 
-    protected boolean isElementPresent(By locator) {
-        try{
-            wd.findElement(locator);
-            return true;
-        } catch (NoSuchElementException ex){
-            return false;
-        }
-    }
 
     public void selectContact() {
         click(By.name("selected[]"));
@@ -51,11 +43,6 @@ public class ContactHelper extends HelperBase {
 
     public void buttonOkClick() {
         click(By.xpath("//div[@id='content']/form/input[21]"));
-    }
-
-    public void returnToContactPage() {
-        click(By.cssSelector("div.msgbox"));
-        click(By.linkText("home page"));
     }
 
     public void buttonUpdateClick() {
@@ -70,7 +57,5 @@ public class ContactHelper extends HelperBase {
         wd.switchTo().alert().accept();
     }
 
-    public void returnToMainPage() {
-        click(By.linkText("home"));
-    }
+
 }
