@@ -2,7 +2,6 @@ package kz.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
 /**
  * Created by xeniya on 6/1/16.
@@ -37,13 +36,5 @@ public class NavigationHelper extends HelperBase {
         click(By.linkText("home"));
     }
 
-    public void returnToGroupPage() {
-        click(By.cssSelector("div.msgbox"));
-        click(By.linkText("group page"));
-    }
 
-    public void returnToContactPage() {
-        click(By.cssSelector("div.msgbox"));
-        click(By.linkText("home page"));
-    }
 }

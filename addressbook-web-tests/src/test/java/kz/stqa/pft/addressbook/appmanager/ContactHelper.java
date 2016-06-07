@@ -3,10 +3,8 @@ package kz.stqa.pft.addressbook.appmanager;
 import kz.stqa.pft.addressbook.model.ContactData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
-
 import org.openqa.selenium.NoSuchElementException;
 
 /**
@@ -38,7 +36,8 @@ public class ContactHelper extends HelperBase {
     }
 
     public void initContactModification() {
-        click(By.xpath("//table[@id='maintable']/tbody/tr[4]/td[8]/a/img"));
+        //click(By.name("Edit"));
+       click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
     }
 
     public void buttonOkClick() {
@@ -58,4 +57,18 @@ public class ContactHelper extends HelperBase {
     }
 
 
+    public boolean isThereContact() {
+        return isElementPresent(By.name("selected[]"));
+    }
+
+    public void returnToContactPage() {
+        click(By.cssSelector("div.msgbox"));
+        click(By.linkText("home page"));
+    }
+
+    public void createContact(ContactData contact, boolean b) {
+        fillContactForm(contact, b);
+        buttonOkClick();
+        returnToContactPage();
+    }
 }
