@@ -16,7 +16,34 @@ public class GroupData {
         this.footer = footer;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
 
+    public int getId() {
+        return id;
+    }
+
+
+    public String getName() {
+        return name;
+    }
+
+    public String getHeader() {
+        return header;
+    }
+
+    public String getFooter() {
+        return footer;
+    }
+
+    @Override
+    public String toString() {
+        return "GroupData{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                '}';
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -39,33 +66,4 @@ public class GroupData {
         this.header = header;
         this.footer = footer;
     }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    @Override
-    public String toString() {
-        return "GroupData{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                '}';
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getHeader() {
-        return header;
-    }
-
-    public String getFooter() {
-        return footer;
-    }
-
 }

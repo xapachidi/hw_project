@@ -3,9 +3,13 @@ package kz.stqa.pft.addressbook.appmanager;
 import kz.stqa.pft.addressbook.model.ContactData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.openqa.selenium.NoSuchElementException;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by xeniya on 6/2/16.
@@ -31,13 +35,15 @@ public class ContactHelper extends HelperBase {
     }
 
 
-    public void selectContact() {
-        click(By.name("selected[]"));
+    public void selectContact(int index) {
+        wd.findElements(By.name("selected[]")).get(index).click();
+        //click(By.name("selected[]"));
     }
 
-    public void initContactModification() {
+    public void initContactModification(int index) {
         //click(By.name("Edit"));
-       click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
+        index = index + 2;
+       click(By.xpath("//table[@id='maintable']/tbody/tr["+index+"]/td[8]/a/img"));
     }
 
     public void buttonOkClick() {
@@ -62,7 +68,7 @@ public class ContactHelper extends HelperBase {
     }
 
     public void returnToContactPage() {
-        click(By.cssSelector("div.msgbox"));
+        //click(By.cssSelector("div.msgbox"));
         click(By.linkText("home page"));
     }
 
@@ -70,5 +76,21 @@ public class ContactHelper extends HelperBase {
         fillContactForm(contact, true);
         buttonOkClick();
         returnToContactPage();
+    }
+
+    public List<ContactData> getContactList() {
+        List<ContactData> contacts = new ArrayList<ContactData>();
+        List<WebElement> rows = wd.findElements(By.name("entry"));
+        for (WebElement row : rows){
+            List<WebElement> cells = row.findElements(By.tagName("td"));
+            int id = Integer.parseInt(row.findElement(By.tagName("input")).getAttribute("value"));
+            String first_name = cells.get(2).getText();
+            String last_name = cells.get(1).getText();
+
+            ContactData contact = new ContactData(id, first_name, null, last_name, null, null, null);
+            contacts.add(contact);
+        }
+        return contacts;
+
     }
 }
