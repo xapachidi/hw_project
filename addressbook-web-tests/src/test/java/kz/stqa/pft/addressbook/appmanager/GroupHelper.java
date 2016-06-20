@@ -6,8 +6,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by xeniya on 6/1/16.
@@ -40,6 +41,10 @@ public class GroupHelper extends HelperBase{
         wd.findElements(By.name("selected[]")).get(index).click();
     }
 
+    public void selectGroupById(int id) {
+        wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
+    }
+
     public void initGroupModification() {
         click(By.name("edit"));
     }
@@ -53,8 +58,8 @@ public class GroupHelper extends HelperBase{
         click(By.linkText("group page"));
     }
 
-    public void modifyGroup(int index, GroupData group) {
-        selectGroup(index);
+    public void modifyGroup(GroupData group) {
+        selectGroupById(group.getId());
         initGroupModification();
         fillGroupForm(group);
         submitGroupModification();
@@ -68,11 +73,6 @@ public class GroupHelper extends HelperBase{
         returnToGroupPage();
     }
 
-    public void deleteGroup(int index) {
-        selectGroup(index);
-        deleteSelectedGroups();
-        returnToGroupPage();
-    }
 
     public boolean isThereAGroup() {
         return isElementPresent(By.name("selected[]"));
@@ -82,8 +82,9 @@ public class GroupHelper extends HelperBase{
        return wd.findElements(By.name("selected[]")).size();
     }
 
-    public List<GroupData> list() {
-        List<GroupData> groups = new ArrayList<GroupData>();
+
+    public Set<GroupData> all() {
+        Set<GroupData> groups = new HashSet<GroupData>();
         List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
         for (WebElement element : elements){
             String name = element.getText();
@@ -91,5 +92,11 @@ public class GroupHelper extends HelperBase{
             groups.add(new GroupData().withId(id).withName(name));
         }
         return groups;
+    }
+
+    public void deleteGroup(GroupData group) {
+        selectGroupById(group.getId());
+        deleteSelectedGroups();
+        returnToGroupPage();
     }
 }
