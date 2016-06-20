@@ -53,6 +53,14 @@ public class GroupHelper extends HelperBase{
         click(By.linkText("group page"));
     }
 
+    public void modifyGroup(int index, GroupData group) {
+        selectGroup(index);
+        initGroupModification();
+        fillGroupForm(group);
+        submitGroupModification();
+        returnToGroupPage();
+    }
+
     public void createGroup(GroupData group) {
         initGroupCreation();
         fillGroupForm(group);
