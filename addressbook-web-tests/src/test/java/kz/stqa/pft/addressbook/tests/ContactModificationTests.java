@@ -18,10 +18,10 @@ public class ContactModificationTests extends TestBase {
     public void testContactModification(){
 
         if (! app.getContactHelper().isThereContact()) {
-            if (!app.getGroupHelper().isThereAGroup()) {
-                app.getNavigationHelper().gotoGroupPage();
-                app.getGroupHelper().createGroup(new GroupData("test1", null, null));
-                app.getNavigationHelper().gotoContactPage();
+            if (!app.group().isThereAGroup()) {
+                app.goTo().gotoGroupPage();
+                app.group().createGroup(new GroupData("test1", null, null));
+                app.goTo().gotoContactPage();
             }
             app.getContactHelper().createContact(new ContactData("Петр", "Петрович", "Кузьмин", "ложки.ком", "+89654123654", "test1"));
         }

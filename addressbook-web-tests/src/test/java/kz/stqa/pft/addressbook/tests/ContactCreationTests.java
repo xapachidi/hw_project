@@ -12,13 +12,13 @@ public class ContactCreationTests extends TestBase{
     
     @Test (enabled = false)
     public void testContactCreation() {
-        app.getNavigationHelper().gotoGroupPage();
-        if(! app.getGroupHelper().isThereAGroup()){
-            app.getGroupHelper().createGroup(new GroupData("test1", null, null));
+        app.goTo().gotoGroupPage();
+        if(! app.group().isThereAGroup()){
+            app.group().createGroup(new GroupData("test1", null, null));
         }
-        app.getNavigationHelper().returnToMainPage();
+        app.goTo().returnToMainPage();
         List<ContactData> before = app.getContactHelper().getContactList();
-        app.getNavigationHelper().gotoContactPage();
+        app.goTo().gotoContactPage();
         ContactData contact = new ContactData("Артем", "Петрович", "Кузьмин", "ложки.ком", "+89654123654", "test1");
         app.getContactHelper().createContact(contact);
         List<ContactData> after = app.getContactHelper().getContactList();
