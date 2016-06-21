@@ -27,7 +27,7 @@ public class GroupModificationTest extends TestBase {
         }
     }
 
-    @Test
+    @Test (enabled = false)
     public void testGroupModification(){
         //int before = app.group().getGroupCount();
         Groups before = app.group().all();
