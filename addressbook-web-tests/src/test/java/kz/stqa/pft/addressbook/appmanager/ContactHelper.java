@@ -5,6 +5,7 @@ import kz.stqa.pft.addressbook.model.Contacts;
 import kz.stqa.pft.addressbook.model.GroupData;
 import kz.stqa.pft.addressbook.tests.ContactEmailTests;
 import kz.stqa.pft.addressbook.tests.ContactPhoneTests;
+import kz.stqa.pft.addressbook.tests.DetailContactTests;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -52,6 +53,10 @@ public class ContactHelper extends HelperBase {
 
     public void initContactModification(int id) {
         wd.findElement(By.cssSelector("a[href='edit.php?id="+id+"']")).click();
+    }
+
+    public void initContactDetail(int id) {
+        wd.findElement(By.cssSelector("a[href='view.php?id="+id+"']")).click();
     }
 
     public void buttonOkClick() {
@@ -111,6 +116,14 @@ public class ContactHelper extends HelperBase {
 
     }
 
+    public Contacts info(){
+        Contacts contactDetail = new Contacts();
+        //List<WebElement> elements = wd.findElements(By.id("content"));
+        String inform  = wd.findElement(By.id("content")).getText();
+
+        return contactDetail;
+    }
+
     public void deleteContact(ContactData contact) {
         selectContactById(contact.getId());
         initContactDeletion();
@@ -135,6 +148,7 @@ public class ContactHelper extends HelperBase {
 
     }
 
+
     public String mergePhones(ContactData contact) {
         return Arrays.asList(contact.getPhone(), contact.getMobilePhone(), contact.getWorkPhone())
                 .stream().filter((s)->!s.equals(""))
@@ -147,5 +161,12 @@ public class ContactHelper extends HelperBase {
                 .stream().filter((s)->!s.equals(""))
                 .map(ContactEmailTests::cleaned)
                 .collect(Collectors.joining("\n"));
+    }
+
+    public String mergeFIO(ContactData contact) {
+        return Arrays.asList(contact.getFirst_name(), contact.getSecond_name(), contact.getLast_name())
+                .stream().filter((s)->!s.equals(""))
+                .map(DetailContactTests::cleaned)
+                .collect(Collectors.joining(" "));
     }
 }
