@@ -3,6 +3,8 @@ package kz.stqa.pft.addressbook.appmanager;
 import kz.stqa.pft.addressbook.model.ContactData;
 import kz.stqa.pft.addressbook.model.Contacts;
 import kz.stqa.pft.addressbook.model.GroupData;
+import kz.stqa.pft.addressbook.tests.ContactEmailTests;
+import kz.stqa.pft.addressbook.tests.ContactPhoneTests;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,7 +13,9 @@ import org.testng.Assert;
 import org.openqa.selenium.NoSuchElementException;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by xeniya on 6/2/16.
@@ -98,9 +102,10 @@ public class ContactHelper extends HelperBase {
             int id = Integer.parseInt(row.findElement(By.tagName("input")).getAttribute("value"));
             String first_name = cells.get(2).getText();
             String last_name = cells.get(1).getText();
+            String allEmails = cells.get(4).getText();
             String allPhones = cells.get(5).getText();
             contacts.add(new ContactData().withId(id).withFirst_name(first_name)
-                    .withLast_name(last_name).withAllPhones(allPhones));
+                    .withLast_name(last_name).withAllEmails(allEmails).withAllPhones(allPhones));
         }
         return contacts;
 
@@ -119,9 +124,28 @@ public class ContactHelper extends HelperBase {
         String home = wd.findElement(By.name("home")).getAttribute("value");
         String mobilePhone = wd.findElement(By.name("mobile")).getAttribute("value");
         String workPhone = wd.findElement(By.name("work")).getAttribute("value");
+        String email = wd.findElement(By.name("email")).getAttribute("value");
+        String email2 = wd.findElement(By.name("email2")).getAttribute("value");
+        String email3 = wd.findElement(By.name("email3")).getAttribute("value");
         wd.navigate().back();
         return new ContactData().withId(contact.getId()).withFirst_name(first_name)
-                .withLast_name(last_name).withPhone(home).withMobilePhone(mobilePhone).withWorkPhone(workPhone);
+                .withLast_name(last_name)
+                .withEmail(email).withEmail2(email2).withEmail3(email3)
+                .withPhone(home).withMobilePhone(mobilePhone).withWorkPhone(workPhone);
 
+    }
+
+    public String mergePhones(ContactData contact) {
+        return Arrays.asList(contact.getPhone(), contact.getMobilePhone(), contact.getWorkPhone())
+                .stream().filter((s)->!s.equals(""))
+                .map(ContactPhoneTests::cleaned)
+                .collect(Collectors.joining("\n"));
+    }
+
+    public String mergeEmails(ContactData contact) {
+        return Arrays.asList(contact.getEmail(), contact.getEmail2(), contact.getEmail3())
+                .stream().filter((s)->!s.equals(""))
+                .map(ContactEmailTests::cleaned)
+                .collect(Collectors.joining("\n"));
     }
 }
