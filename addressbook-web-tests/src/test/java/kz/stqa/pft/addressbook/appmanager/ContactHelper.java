@@ -116,12 +116,12 @@ public class ContactHelper extends HelperBase {
 
     }
 
-    public Contacts info(){
-        Contacts contactDetail = new Contacts();
-        //List<WebElement> elements = wd.findElements(By.id("content"));
+    public String info(ContactData contact){
+        initContactDetail(contact.getId());
         String inform  = wd.findElement(By.id("content")).getText();
+        //Contacts contactDetail = new Contacts();
 
-        return contactDetail;
+        return inform;
     }
 
     public void deleteContact(ContactData contact) {
@@ -133,7 +133,9 @@ public class ContactHelper extends HelperBase {
     public ContactData infoFromEditForm(ContactData contact) {
         initContactModification(contact.getId());
         String first_name = wd.findElement(By.name("firstname")).getAttribute("value");
+        String second_name = wd.findElement(By.name("middlename")).getAttribute("value");
         String last_name = wd.findElement(By.name("lastname")).getAttribute("value");
+        String company = wd.findElement(By.name("company")).getAttribute("value");
         String home = wd.findElement(By.name("home")).getAttribute("value");
         String mobilePhone = wd.findElement(By.name("mobile")).getAttribute("value");
         String workPhone = wd.findElement(By.name("work")).getAttribute("value");
@@ -142,7 +144,7 @@ public class ContactHelper extends HelperBase {
         String email3 = wd.findElement(By.name("email3")).getAttribute("value");
         wd.navigate().back();
         return new ContactData().withId(contact.getId()).withFirst_name(first_name)
-                .withLast_name(last_name)
+                .withSecond_name(second_name).withLast_name(last_name).withCompany(company)
                 .withEmail(email).withEmail2(email2).withEmail3(email3)
                 .withPhone(home).withMobilePhone(mobilePhone).withWorkPhone(workPhone);
 
@@ -164,9 +166,38 @@ public class ContactHelper extends HelperBase {
     }
 
     public String mergeFIO(ContactData contact) {
-        return Arrays.asList(contact.getFirst_name(), contact.getSecond_name(), contact.getLast_name())
+        String infoFIO = Arrays.asList(contact.getFirst_name(), contact.getSecond_name(), contact.getLast_name())
                 .stream().filter((s)->!s.equals(""))
-                .map(DetailContactTests::cleaned)
                 .collect(Collectors.joining(" "));
+        return infoFIO;
+
     }
+
+    public String mergePhone(ContactData contact){
+        //String HP = "H: " + contact.getPhone();
+        //String MP = "M: " + contact.getMobilePhone();
+        //String WP = "P: " + contact.getWorkPhone();
+
+        return Arrays.asList("H: " + contact.getPhone(), "M: " + contact.getMobilePhone(), "W: " + contact.getWorkPhone())
+                .stream().filter((s)-> !s.equals(""))
+                .collect(Collectors.joining("\n"));
+    }
+
+    public String mergeEmails1(ContactData contact){
+        String  email1 = " (www." + contact.getEmail().substring(contact.getEmail().indexOf("@")+1) + ")";
+        String email2 = " (www." + contact.getEmail2().substring(contact.getEmail2().indexOf("@")+1) + ")";
+        String  email3 = " (www." + contact.getEmail3().substring(contact.getEmail3().indexOf("@")+1) + ")";
+
+        return Arrays.asList(contact.getEmail() + email1, contact.getEmail2() + email2, contact.getEmail3()+ email3)
+                .stream().filter((s)-> !s.equals(""))
+                .collect(Collectors.joining("\n"));
+    }
+
+    public String mergeInfo(ContactData contact){
+        String infoAll = Arrays.asList(mergeFIO(contact), mergePhone(contact), mergeEmails1(contact))
+                .stream().filter((s)-> !s.equals(""))
+                .collect(Collectors.joining("\n\n"));
+        return infoAll;
+    }
+
 }

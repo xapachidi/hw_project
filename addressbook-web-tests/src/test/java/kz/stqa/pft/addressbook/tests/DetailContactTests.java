@@ -2,7 +2,10 @@ package kz.stqa.pft.addressbook.tests;
 
 import kz.stqa.pft.addressbook.model.ContactData;
 import kz.stqa.pft.addressbook.model.GroupData;
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
 import org.openqa.selenium.By;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -26,11 +29,12 @@ public class DetailContactTests extends TestBase {
     @Test
     public void testDetailContact(){
         ContactData contact = app.contact().all().iterator().next();
-        app.contact().initContactDetail(contact.getId());
-        String info = app.contact().info().toString();
+
+       MatcherAssert.assertThat(app.contact().mergeInfo(app.contact().infoFromEditForm(contact)), CoreMatchers.equalTo(app.contact().info(contact)));
+
+
+
+
     }
 
-    public static String cleaned(String email){
-        return email.replaceAll("\\s", "");
-    }
 }
