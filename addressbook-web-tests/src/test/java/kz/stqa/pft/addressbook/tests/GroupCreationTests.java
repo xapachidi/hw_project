@@ -2,7 +2,12 @@ package kz.stqa.pft.addressbook.tests;
 
 import kz.stqa.pft.addressbook.model.GroupData;
 import kz.stqa.pft.addressbook.model.Groups;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -10,11 +15,20 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class GroupCreationTests extends TestBase {
 
-    @Test
-    public void testGroupCreation() {
+    @DataProvider
+    public Iterator<Object[]> validGroups(){
+        List<Object[]> list = new ArrayList<Object[]>();
+        list.add(new Object[] {"test1", "header1", "footer1"});
+        list.add(new Object[] {"test2", "header2", "footer2"});
+        return list.iterator();
+
+    }
+
+    @Test(dataProvider = "validGroups")
+    public void testGroupCreation(String name, String header, String footer) {
+        GroupData group = new GroupData().withName(name).withHeader(header).withFooter(footer);
         app.goTo().gotoGroupPage();
         Groups before = (Groups) app.group().all();
-        GroupData group = new GroupData().withName("test2");
         app.group().createGroup(group);
         assertThat(app.group().getGroupCount(), equalTo(before.size() + 1));
         Groups after = (Groups) app.group().all();
@@ -24,7 +38,7 @@ public class GroupCreationTests extends TestBase {
 
     }
 
-    @Test
+    @Test (enabled = false)
     public void testBadGroupCreation() {
         app.goTo().gotoGroupPage();
         Groups before = (Groups) app.group().all();
