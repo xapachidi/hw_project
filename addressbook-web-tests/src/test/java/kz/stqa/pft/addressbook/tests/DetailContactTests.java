@@ -32,9 +32,6 @@ public class DetailContactTests extends TestBase {
 
        MatcherAssert.assertThat(app.contact().mergeInfo(app.contact().infoFromEditForm(contact)), CoreMatchers.equalTo(app.contact().info(contact)));
 
-
-
-
     }
 
 }
