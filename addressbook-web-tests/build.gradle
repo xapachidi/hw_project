@@ -12,6 +12,7 @@ dependencies{
     compile 'org.hamcrest:java-hamcrest:2.0.0.0'
     compile 'com.google.code.gson:gson:2.7'
     compile 'com.thoughtworks.xstream:xstream:1.4.9'
+    compile 'mysql:mysql-connector-java:6.0.3'
 }
 
 task testGroups(type: Test){
