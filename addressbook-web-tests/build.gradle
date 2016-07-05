@@ -14,7 +14,6 @@ dependencies{
     compile 'com.thoughtworks.xstream:xstream:1.4.9'
 }
 
-<<<<<<< Updated upstream
 task testGroups(type: Test){
     useTestNG{
         suites 'src/test/resources/testng-groups.xml'
@@ -40,16 +39,3 @@ task testContacts(type: Test){
 
 }
 
-=======
-task testContacts(type: Test){
-    useTestNG{
-        suites 'src/test/resources/testng-contacts.xml'
-    }
-}
-
-task testGroups(type: Test){
-    useTestNG{
-        suites 'src/test/resources/testng-groups.xml'
-    }
-}
->>>>>>> Stashed changes
