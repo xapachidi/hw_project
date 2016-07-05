@@ -8,5 +8,8 @@
             <class name="kz.stqa.pft.addressbook.tests.GroupDeletionTests" />
         </classes>
     </test>
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 </suite>

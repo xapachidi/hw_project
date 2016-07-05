@@ -14,7 +14,11 @@ import org.testng.annotations.BeforeSuite;
 public class TestBase {
 
     protected static final ApplicationManager app
+<<<<<<< Updated upstream
             = new ApplicationManager(System.getProperty("browser", BrowserType.CHROME));
+=======
+            = new ApplicationManager(System.getProperty("browser"));
+>>>>>>> Stashed changes
 
     @BeforeSuite
     public void setUp() throws Exception {
