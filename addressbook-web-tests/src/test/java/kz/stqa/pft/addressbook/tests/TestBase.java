@@ -1,6 +1,8 @@
 package kz.stqa.pft.addressbook.tests;
 
 import kz.stqa.pft.addressbook.appmanager.ApplicationManager;
+import kz.stqa.pft.addressbook.model.ContactData;
+import kz.stqa.pft.addressbook.model.Contacts;
 import kz.stqa.pft.addressbook.model.GroupData;
 import kz.stqa.pft.addressbook.model.Groups;
 import org.hamcrest.CoreMatchers;
@@ -42,6 +44,17 @@ public class TestBase {
             Groups uiGroups = app.group().all();
             assertThat(uiGroups, equalTo(dbGroups.stream()
                     .map((g) -> new GroupData().withId(g.getId()).withName(g.getName()))
+                    .collect(Collectors.toSet())));
+        }
+    }
+
+    public void verifyCintactListInUI() {
+        if(Boolean.getBoolean("verifyUI")) {
+            Contacts dbContacts = app.db().contacts();
+            Contacts uiContacts = app.contact().all();
+            assertThat(uiContacts, equalTo(dbContacts.stream()
+                    .map((g) -> new ContactData().withId(g.getId()).withFirst_name(g.getFirst_name())
+                            .withLast_name(g.getLast_name()).withAllEmails(g.getAllEmails()).withAllPhones(g.getAllPhones()))
                     .collect(Collectors.toSet())));
         }
     }

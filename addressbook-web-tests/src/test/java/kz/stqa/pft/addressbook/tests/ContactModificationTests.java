@@ -30,15 +30,16 @@ public class ContactModificationTests extends TestBase {
 
     @Test
     public void testContactModification(){
-       Contacts before = app.contact().all();
+       Contacts before = app.db().contacts();
         ContactData modifiedContact = before.iterator().next();
         //app.contact().selectContact(before.size() -1);
         //app.contact().initContactModification(before.size()-1);
-        ContactData contact = new ContactData().withId(modifiedContact.getId()).withFirst_name("Петр").withSecond_name("Петрович").withLast_name("Кузьмин").withCompany("ложки.ком").withPhone("+89654123654").withGroup("test1");
+        ContactData contact = new ContactData().withId(modifiedContact.getId()).withFirst_name("Иван").withSecond_name("Петрович").withLast_name("Кузьмин").withCompany("ложки.ком").withPhone("+89654123654").withGroup("test1");
+        //app.goTo().returnToMainPage();
         app.contact().modifyContact(contact);
-        Contacts after = app.contact().all();
+        Contacts after = app.db().contacts();
 
-        assertEquals(after.size(), before.size());
+        //assertEquals(after.size(), before.size());
 
         assertThat(after, equalTo(before.without(modifiedContact).withAdded(contact)));
     }
