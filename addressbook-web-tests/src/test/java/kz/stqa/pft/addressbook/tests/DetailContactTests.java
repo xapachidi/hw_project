@@ -9,6 +9,9 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 /**
  * Created by xeniya on 6/22/16.
  */
@@ -30,7 +33,7 @@ public class DetailContactTests extends TestBase {
     public void testDetailContact(){
         ContactData contact = app.contact().all().iterator().next();
 
-       MatcherAssert.assertThat(app.contact().mergeInfo(app.contact().infoFromEditForm(contact)), CoreMatchers.equalTo(app.contact().info(contact)));
+       assertThat(app.contact().mergeInfo(app.contact().infoFromEditForm(contact)), equalTo(app.contact().info(contact)));
 
     }
 

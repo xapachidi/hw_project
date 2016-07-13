@@ -48,7 +48,7 @@ public class TestBase {
         }
     }
 
-    public void verifyCintactListInUI() {
+    public void verifyContactListInUI() {
         if(Boolean.getBoolean("verifyUI")) {
             Contacts dbContacts = app.db().contacts();
             Contacts uiContacts = app.contact().all();

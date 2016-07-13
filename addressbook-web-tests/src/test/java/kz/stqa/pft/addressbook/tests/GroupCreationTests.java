@@ -3,6 +3,7 @@ package kz.stqa.pft.addressbook.tests;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.thoughtworks.xstream.XStream;
+import kz.stqa.pft.addressbook.model.Contacts;
 import kz.stqa.pft.addressbook.model.GroupData;
 import kz.stqa.pft.addressbook.model.Groups;
 import org.testng.annotations.DataProvider;
@@ -56,26 +57,30 @@ public class GroupCreationTests extends TestBase {
     public void testGroupCreation(GroupData group) {
         //GroupData group = new GroupData().withName(name).withHeader(header).withFooter(footer);
         app.goTo().gotoGroupPage();
-        Groups before = (Groups) app.group().all();
+        Groups before = app.db().groups();
+        //Groups before = (Groups) app.group().all();
         app.group().createGroup(group);
-        assertThat(app.group().getGroupCount(), equalTo(before.size() + 1));
-        Groups after = (Groups) app.group().all();
-
+       // assertThat(app.group().getGroupCount(), equalTo(before.size() + 1));
+        Groups after = app.db().groups();
+        //Groups after = (Groups) app.group().all();
         assertThat(after, equalTo(
                 before.withAdded(group.withId(after.stream().mapToInt((g)->g.getId()).max().getAsInt()))));
+        verifyGroupListInUI();
 
     }
 
     @Test (enabled = false)
     public void testBadGroupCreation() {
         app.goTo().gotoGroupPage();
-        Groups before = (Groups) app.group().all();
+        //Groups before = (Groups) app.group().all();
+        Groups before = app.db().groups();
         GroupData group = new GroupData().withName("test2'");
         //int before = app.group().getGroupCount();
         app.group().createGroup(group);
         //int after = app.group().getGroupCount();
-        assertThat(app.group().getGroupCount(), equalTo(before.size()));
-        Groups after = (Groups) app.group().all();
+        //assertThat(app.group().getGroupCount(), equalTo(before.size()));
+        Groups after = app.db().groups();
+        //Groups after = (Groups) app.group().all();
         assertThat(after, equalTo(before));
 
     }
