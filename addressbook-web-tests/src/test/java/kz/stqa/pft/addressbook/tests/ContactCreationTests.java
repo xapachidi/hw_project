@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import kz.stqa.pft.addressbook.model.ContactData;
 import kz.stqa.pft.addressbook.model.Contacts;
 import kz.stqa.pft.addressbook.model.GroupData;
+import kz.stqa.pft.addressbook.model.Groups;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -44,13 +45,16 @@ public class ContactCreationTests extends TestBase{
         }
         app.goTo().returnToMainPage();
     }
+
     
     @Test (dataProvider = "validGroupsFromJson")
     public void testContactCreation(ContactData contacts) {
         //Contacts before = (Contacts) app.contact().all();
+        Groups groups = app.db().groups();
         Contacts before = app.db().contacts();
         app.goTo().gotoContactPage();
-       // ContactData contact = new ContactData().withFirst_name("Артем").withSecond_name("Петрович").withLast_name("Кузьмин").withCompany("ложки.ком").withPhone("+89654123654").withGroup("test1");
+       ContactData contact = new ContactData().withFirst_name("Артем").withSecond_name("Петрович").withLast_name("Кузьмин").withCompany("ложки.ком").withPhone("+89654123654")
+               .inGroup(groups.iterator().next());
         app.contact().createContact(contacts);
         Contacts after = app.db().contacts();
         //Contacts after = app.contact().all();

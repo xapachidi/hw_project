@@ -62,7 +62,7 @@ public class ContactDataGenerator {
         for (int i = 0; i < count; i++){
             contacts.add(new ContactData().withFirst_name(String.format("Имя %s", i))
             .withSecond_name(String.format("Отчество %s", i)).withLast_name(String.format("Фамилия %s", i))
-            .withPhone(String.format("12345%s", i)).withGroup(String.format("test %s", i)));
+            .withPhone(String.format("12345%s", i)));
         }
         return contacts;
     }

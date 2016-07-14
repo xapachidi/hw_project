@@ -23,7 +23,7 @@ public class ContactDeletionTests extends TestBase {
                 app.group().createGroup(new GroupData().withName("test1"));
                 app.goTo().gotoContactPage();
             }
-            app.contact().createContact(new ContactData().withFirst_name("Петр").withSecond_name("Петрович").withLast_name("Кузьмин").withCompany("ложки.ком").withPhone("+89654123654").withGroup("test1"));
+            app.contact().createContact(new ContactData().withFirst_name("Петр").withSecond_name("Петрович").withLast_name("Кузьмин").withCompany("ложки.ком").withPhone("+89654123654"));
         }
     }
 
