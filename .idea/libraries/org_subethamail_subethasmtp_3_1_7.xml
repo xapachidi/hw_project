@@ -1,0 +1,18 @@
+<component name="libraryTable">
+  <library name="org.subethamail:subethasmtp:3.1.7" type="repository">
+    <properties maven-id="org.subethamail:subethasmtp:3.1.7" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/subethasmtp-3.1.7.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mail-1.4.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/activation-1.1.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/slf4j-api-1.6.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jsr305-1.3.9.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/lib/subethasmtp-3.1.7-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/subethasmtp-3.1.7-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
