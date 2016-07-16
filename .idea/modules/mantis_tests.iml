@@ -15,7 +15,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="Gradle: org.testng:testng:6.9.10" level="project" />
-    <orderEntry type="module-library">
+    <orderEntry type="module-library" exported="">
       <library name="Gradle: java-hamcrest-2.0.0.0:0">
         <CLASSES />
         <JAVADOC />
@@ -46,8 +46,8 @@
     <orderEntry type="library" exported="" name="Gradle: org.beanshell:bsh:2.0b4" level="project" />
     <orderEntry type="library" exported="" name="Gradle: com.beust:jcommander:1.48" level="project" />
     <orderEntry type="library" exported="" name="Gradle: org.seleniumhq.selenium:selenium-java:2.53.0" level="project" />
-    <orderEntry type="library" name="com.google.code.gson:gson:2.7" level="project" />
-    <orderEntry type="library" scope="TEST" name="org.hamcrest:java-hamcrest:2.0.0.0" level="project" />
-    <orderEntry type="library" name="com.thoughtworks.xstream:xstream:1.4.9" level="project" />
+    <orderEntry type="library" exported="" name="com.google.code.gson:gson:2.7" level="project" />
+    <orderEntry type="library" exported="" scope="TEST" name="org.hamcrest:java-hamcrest:2.0.0.0" level="project" />
+    <orderEntry type="library" exported="" name="com.thoughtworks.xstream:xstream:1.4.9" level="project" />
   </component>
 </module>
