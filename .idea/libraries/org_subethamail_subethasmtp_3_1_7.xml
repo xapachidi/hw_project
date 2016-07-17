@@ -1,6 +1,5 @@
 <component name="libraryTable">
-  <library name="org.subethamail:subethasmtp:3.1.7" type="repository">
-    <properties maven-id="org.subethamail:subethasmtp:3.1.7" />
+  <library name="org.subethamail:subethasmtp:3.1.7">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/lib/subethasmtp-3.1.7.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/mail-1.4.4.jar!/" />
