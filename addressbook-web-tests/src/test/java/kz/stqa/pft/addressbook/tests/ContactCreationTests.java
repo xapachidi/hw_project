@@ -49,7 +49,7 @@ public class ContactCreationTests extends TestBase{
     
     @Test (dataProvider = "validGroupsFromJson")
     public void testContactCreation(ContactData contacts) {
-        //Contacts before = (Contacts) app.contact().all();
+       //Contacts before = (Contacts) app.contact().all();
         Groups groups = app.db().groups();
         Contacts before = app.db().contacts();
         app.goTo().gotoContactPage();
