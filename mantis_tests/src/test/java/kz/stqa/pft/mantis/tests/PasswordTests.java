@@ -38,6 +38,8 @@ public class PasswordTests extends TestBase{
         app.user().finish(confirmationLink);
         String new_password = "12345";
         app.user().start(modifiedUser.getUsername(), new_password);
+        // без использования браузера
+        //session.login(modifiedUser.getUsername(), new_password);
     }
 
     private String findConfirmationLink(List<MailMessage> mailMessages, String email) {
