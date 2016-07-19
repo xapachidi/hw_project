@@ -1,10 +1,13 @@
 package kz.stqa.pft.mantis.tests;
+import biz.futureware.mantis.rpc.soap.client.IssueData;
+import biz.futureware.mantis.rpc.soap.client.ObjectRef;
 import kz.stqa.pft.mantis.model.Issue;
 import kz.stqa.pft.mantis.model.Project;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import javax.xml.rpc.ServiceException;
+import java.math.BigInteger;
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
 import java.util.Set;
@@ -30,7 +33,14 @@ public class SoapTests extends TestBase{
                 .withProject(projects.iterator().next());
         Issue created = app.soap().addIssue(issue);
         Assert.assertEquals(issue.getSummary(), created.getSummary());
+    }
 
+    @Test
+    public void testStatusCheck() throws RemoteException, ServiceException, MalformedURLException {
+        BigInteger getId = app.soap().getIssues();
+        //IssueData status = app.soap().getStatus();
+        ObjectRef[] state = app.soap().getStatus();
+        System.out.println(state);
     }
 
 }

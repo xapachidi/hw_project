@@ -9,12 +9,23 @@ public class Issue {
     private String description;
     private Project project;
     private String name;
+    private String status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public Issue withStatus(String status) {
+        this.status = status;
+        return this;
+    }
 
     public String getName() {
         return name;
     }
 
     public Issue withName(String name) {
+
         this.name = name;
         return this;
     }
