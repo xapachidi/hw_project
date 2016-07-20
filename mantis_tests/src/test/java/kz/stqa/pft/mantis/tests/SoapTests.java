@@ -38,9 +38,7 @@ public class SoapTests extends TestBase{
     @Test
     public void testStatusCheck() throws RemoteException, ServiceException, MalformedURLException {
         BigInteger getId = app.soap().getIssues();
-        //IssueData status = app.soap().getStatus();
-        ObjectRef[] state = app.soap().getStatus();
-        System.out.println(state);
+        skipIfNotFixed(getId.intValue());
     }
 
 }

@@ -2,6 +2,7 @@ package kz.stqa.pft.mantis.tests;
 
 import biz.futureware.mantis.rpc.soap.client.IssueData;
 import biz.futureware.mantis.rpc.soap.client.MantisConnectPortType;
+import biz.futureware.mantis.rpc.soap.client.ObjectRef;
 import kz.stqa.pft.mantis.appmanager.ApplicationManager;
 import kz.stqa.pft.mantis.model.Issue;
 import org.openqa.selenium.remote.BrowserType;
@@ -24,23 +25,19 @@ public class TestBase {
     protected static final ApplicationManager app
             = new ApplicationManager(System.getProperty("browser", BrowserType.FIREFOX));
 
-  /*  boolean isIssueOpen(int issueId) throws RemoteException, ServiceException, MalformedURLException {
-        app.soap().getIssues();
-
-        if (){
-            return true;
-        }
-        else {
+   public boolean isIssueOpen(int issueId) throws RemoteException, ServiceException, MalformedURLException {
+       String state = app.soap().getStatus().getName();
+        if (state.equals("closed")){
             return false;
         }
+            return true;
+    }
 
-    }*/
-
-    /*public void skipIfNotFixed(int issueId) {
+    public void skipIfNotFixed(int issueId) throws RemoteException, ServiceException, MalformedURLException {
         if (isIssueOpen(issueId)) {
             throw new SkipException("Ignored because of issue " + issueId);
         }
-    }*/
+    }
 
     @BeforeSuite
     public void setUp() throws Exception {
