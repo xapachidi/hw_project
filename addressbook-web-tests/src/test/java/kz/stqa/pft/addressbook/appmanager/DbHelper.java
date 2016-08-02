@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.testng.Assert;
 
 import java.security.acl.Group;
 import java.util.List;
@@ -46,5 +47,15 @@ public class DbHelper {
         session.getTransaction().commit();
         session.close();
         return new Contacts(result);
+    }
+
+    public ContactData contactWitnId(int id) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        List<ContactData> result = session.createQuery("from ContactData where id = " + id + " and deprecated = '0000-00-00'").list();
+        Assert.assertEquals(result.size(), 1);
+        session.getTransaction().commit();
+        session.close();
+        return  result.iterator().next();
     }
 }

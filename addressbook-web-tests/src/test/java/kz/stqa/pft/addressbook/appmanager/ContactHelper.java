@@ -43,11 +43,8 @@ public class ContactHelper extends HelperBase {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
     }
-
-
-    public void selectContact(int id) {
-        wd.findElements(By.name("selected[]")).get(id).click();
-        //click(By.name("selected[]"));
+    public void selectListGroups(String selectLocator, String nameGroup) {
+        new Select(wd.findElement(By.name(selectLocator))).selectByVisibleText(nameGroup);
     }
 
     public void selectContactById(int id) {
@@ -83,9 +80,20 @@ public class ContactHelper extends HelperBase {
         return isElementPresent(By.name("selected[]"));
     }
 
+    public void initAddGroup(){
+        wd.findElement(By.name("add")).click();
+    }
+
+    public void initDeleteGroup(){
+        wd.findElement(By.name("remove")).click();
+    }
+
     public void returnToContactPage() {
-        //click(By.cssSelector("div.msgbox"));
         click(By.linkText("home page"));
+    }
+
+    public void returnToGroupPage(String groupName){
+        wd.findElement(By.linkText("group page \""+groupName+"\"")).click();
     }
 
     public void createContact(ContactData contact) {
@@ -201,6 +209,21 @@ public class ContactHelper extends HelperBase {
                 .stream().filter((s)-> !s.equals(""))
                 .collect(Collectors.joining("\n\n"));
         return infoAll;
+    }
+
+    public void addGroup(ContactData contact, GroupData group){
+        selectListGroups("group", "[all]");
+        selectContactById(contact.getId());
+        selectListGroups("to_group", group.getName());
+        initAddGroup();
+        returnToGroupPage(group.getName());
+    }
+
+    public void deleteGroup(ContactData contact, GroupData group) {
+        selectListGroups("group", group.getName());
+        selectContactById(contact.getId());
+        initDeleteGroup();
+        returnToGroupPage(group.getName());
     }
 
 }
