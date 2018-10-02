@@ -12,19 +12,19 @@ public class Collections {
         String[] langs = new String[4];
         langs[0] = "Java";
         langs[1] = "C#";
-        langs[2] = "Pyton";
+        langs[2] = "Python";
         langs[3] = "PHP";
 
         List<String> languages = new ArrayList<String>();
         languages.add("Java");
         languages.add("C#");
-        languages.add("Pyton");
+        languages.add("Python");
 
 
 
         //можно и так написать
-        //String[] langs = ("Java", "C#", "Pyton", "PHP");
-        //List<String> languages =Arrays.asList("Java", "C#", "Pyton", "PHP");
+        //String[] langs = ("Java", "C#", "Python", "PHP");
+        //List<String> languages =Arrays.asList("Java", "C#", "Python", "PHP");
 
        /* for (int i = 0; i<langs.length; i++){
             System.out.println("Я хочу выучить " + langs[i]);
